@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ToDoListController!{% endblock %}
+
+
+{% block body %}
+{{ parent() }}
+
+<h3>Créer une tâche</h3>
+    <div class="container">
+        <div class="row">
+            <div class="col-5">
+                {{ form_start(form, {"attr" : {'novalidate': 'novalidate'}}) }}
+                    {{ form_row(form.title) }}
+                    <button type="submit" class=" col-3 btn btn-primary" >Créer</button>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+<a href="/">Retour</a>
+{% endblock %}
