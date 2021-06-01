@@ -3,11 +3,21 @@
 namespace App\Entity;
 
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * @ORM\Entity()
+ * @ORM\Table(name="to_do_list")
+ */
 class Task{
 
     // Attributes
 
+/**
+ * @ORM\Id()
+ * @ORM\GeneratedValue(strategy="AUTO")
+ * @ORM\Column(type="integer")
+ */
     private $id;
 
 /**
@@ -18,9 +28,18 @@ class Task{
  *      minMessage = "Le nom est trop court",
  *      maxMessage = "Le nom est trop long"
  * )
+ * @ORM\Column(type="string")
  */
     private $title;
-    private $id_list;
+
+/**
+ * @ORM\Column(type="integer")
+ */
+    private $list;
+
+/**
+ * @ORM\Column(type="boolean")
+ */
     private $completed;
 
     // Methods
@@ -35,9 +54,9 @@ class Task{
         return $this->title;
     }
 
-    public function getId_list()
+    public function getList()
     {
-        return $this->id_list;
+        return $this->list;
     }
 
     public function getCompleted()
@@ -57,9 +76,9 @@ class Task{
         return $this;
     }
 
-    public function setId_list($id_list)
+    public function setList($list)
     {
-        $this->id_list = $id_list;
+        $this->list = $list;
         return $this;
     }
 
