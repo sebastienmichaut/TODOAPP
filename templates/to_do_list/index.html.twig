@@ -1,24 +1,35 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-{{ parent() }}
+    {{ parent() }}
 {% endblock %}
 
 
 {% block body %}
-{{ parent() }}
+    {{ parent() }}
 
-<h3>Créer une liste</h3>
+    {% set route = app.request.get("_route") %}
+    {% if route ==  "app_todolist_update" %}
+        <h3>Modifier une liste</h3>
+    {% else %}
+        <h3>Créer une liste</h3>
+    {% endif %}
+
     <div class="container">
         <div class="row">
             <div class="col-5">
                 {{ form_start(form, {"attr" : {'novalidate': 'novalidate'}}) }}
                     {{ form_row(form.name) }}
                     {{ form_row(form.color) }}
-                    <button type="submit" class=" col-3 btn btn-primary" >Créer</button>
+                        {% set route = app.request.get("_route") %}
+                            {% if route ==  "app_todolist_update" %}
+                                <button type="submit" class=" col-3 btn btn-primary" >Mettre à jour</button>
+                            {% else %}
+                                <button type="submit" class=" col-3 btn btn-primary" >Créer</button>    
+                            {% endif %}
                 {{ form_end(form) }}
             </div>
         </div>
     </div>
-<a href="/">Retour</a>
+    <a href="/">Retour</a>
 {% endblock %}
