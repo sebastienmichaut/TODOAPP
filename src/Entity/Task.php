@@ -7,39 +7,38 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity()
- * @ORM\Table(name="to_do_list")
  */
 class Task{
 
     // Attributes
 
-/**
- * @ORM\Id()
- * @ORM\GeneratedValue(strategy="AUTO")
- * @ORM\Column(type="integer")
- */
+    /**
+     * @ORM\Id()
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(type="integer")
+     */
     private $id;
 
-/**
- * @Assert\NotBlank(message = "Le nom ne doit pas être vide.")
- * @Assert\Length(
- *      min = 1,
- *      max = 25,
- *      minMessage = "Le nom est trop court",
- *      maxMessage = "Le nom est trop long"
- * )
- * @ORM\Column(type="string")
- */
+    /**
+     * @Assert\NotBlank(message = "Le nom ne doit pas être vide.")
+     * @Assert\Length(
+     *      min = 1,
+     *      max = 25,
+     *      minMessage = "Le nom est trop court",
+     *      maxMessage = "Le nom est trop long"
+     * )
+     * @ORM\Column(type="string")
+     */
     private $title;
 
-/**
- * @ORM\Column(type="integer")
- */
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\ToDoList", inversedBy="tasks")
+     */
     private $list;
 
-/**
- * @ORM\Column(type="boolean")
- */
+    /**
+     * @ORM\Column(type="boolean")
+     */
     private $completed;
 
     // Methods
