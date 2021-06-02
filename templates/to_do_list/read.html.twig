@@ -14,12 +14,18 @@
             <div class="card-body">
                 <h5 class="card-title me-2">{{ liste.name }}</h5>
             </div>
+                {% for task in liste.tasks %}
+                    <div class="card-body">
+                        <h5 class="card-title me-2">{{ task.title }}</h5>
+                        <input type="checkbox" {{ task.completed ? "checked" : "" }} class="checkbox" name="" id="" onchange="window.location.href='/checkbox/{{task.id}}'">Tache complétée<br>
+                        <a href="/task/updateTask/{{ task.id }}" class="card-link btn btn-warning">Modifier cette tâche</a>
+                        <a href="/task/deleteTask/{{ task.id }}" class="card-link btn btn-danger">supprimer cette tâche</a>
+                    </div>
+                {% endfor %}
         </div><br>
             <a href="/toDoList/delete/{{ liste.id }}" class="card-link btn btn-danger">supprimer la liste</a>
             <a href="/toDoList/update/{{ liste.id }}" class="card-link btn btn-success">modifier la liste</a>
             <a href="/task/createTask/{{ liste.id }}" class="card-link btn btn-primary">Ajouter une tâche</a>
-            <a href="/task/updateTask/{{ liste.id }}" class="card-link btn btn-warning">Modifier une tâche</a>                        
-    </div>
-
+        </div>
 <a href="/">Retour</a>
 {% endblock %}

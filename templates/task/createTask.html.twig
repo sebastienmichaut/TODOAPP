@@ -8,13 +8,24 @@
 {% block body %}
 {{ parent() }}
 
-<h3>Créer une tâche</h3>
+    {% set route = app.request.get("_route") %}
+    {% if route ==  "app_task_update" %}
+        <h3>Modifier une tache</h3>
+    {% else %}
+        <h3>Créer une tache</h3>
+    {% endif %}
+
     <div class="container">
         <div class="row">
             <div class="col-5">
                 {{ form_start(form, {"attr" : {'novalidate': 'novalidate'}}) }}
                     {{ form_row(form.title) }}
-                    <button type="submit" class=" col-3 btn btn-primary" >Créer</button>
+                        {% set route = app.request.get("_route") %}
+                            {% if route ==  "app_task_update" %}
+                                <button type="submit" class=" col-3 btn btn-primary" >Mettre à jour</button>
+                            {% else %}
+                                <button type="submit" class=" col-3 btn btn-primary" >Créer</button>    
+                            {% endif %}
                 {{ form_end(form) }}
             </div>
         </div>

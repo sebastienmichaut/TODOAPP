@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 class ToDoListController extends AbstractController
 {
     /**
@@ -70,6 +71,17 @@ class ToDoListController extends AbstractController
         return $this->render("to_do_list/read-all.html.twig", [
             "listes" => $lists
         ]);
+        // $totalTasks = $repository->createQueryBuilder('task')
+        //         ->select('count(task.id)')
+        //         ->getQuery()
+        //         ->getSingleScalarResult();
+
+        // $completedTasks = $repository->createQueryBuilder(‘task’)
+        //         ->where(‘task’.completed = 1’)
+        //     ->select('count(task.id)')
+        //         ->getQuery()
+        //         ->getSingleScalarResult();
+
     }
 
     /**

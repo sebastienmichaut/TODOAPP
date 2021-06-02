@@ -4,9 +4,10 @@ namespace App\Entity;
 
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\TaskRepository;
 
 /**
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass=TaskRepository::class)
  */
 class Task{
 
@@ -23,7 +24,7 @@ class Task{
      * @Assert\NotBlank(message = "Le nom ne doit pas être vide.")
      * @Assert\Length(
      *      min = 1,
-     *      max = 25,
+     *      max = 50,
      *      minMessage = "Le nom est trop court",
      *      maxMessage = "Le nom est trop long"
      * )
@@ -33,6 +34,7 @@ class Task{
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\ToDoList", inversedBy="tasks")
+     * @ORM\JoinColumn(name="list_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $list;
 

@@ -22,8 +22,8 @@ class TaskController extends AbstractController{
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $task->setList($list);
-            $task->setCompleted(0);
+            $task->setList($list)
+                ->setCompleted(0);
             $em->persist($task);
             $em->flush();
             
@@ -47,8 +47,36 @@ class TaskController extends AbstractController{
             return $this->redirectToRoute("Welcome");
         }
 
-        return $this->render("task/updateTask.html.twig", [
+        return $this->render("task/createTask.html.twig", [
             "form" => $form->createView()
         ]);
     }
+
+    /**
+     * @Route("/task/deleteTask/{id}")
+     */
+    public function delete(Task $delete): Response{
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($delete);
+        $em->flush();
+        
+        return $this->redirectToRoute("Welcome");
+    }
+
+    /**
+     * @Route("/checkbox/{id}")
+     */
+
+    public function checkBox(Task $task): Response {
+            $task->setCompleted(!$task->getCompleted());
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirect("/toDoList/read/{$task->getList()->getId()}");
+        }
+
+
+            
+
+
+
 }
